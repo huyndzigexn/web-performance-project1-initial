@@ -8,17 +8,19 @@ pipeline {
     stages {
         stage('Deploy') {
             steps {
-                withCredentials([file(credentialsId: 'jenkins2', variable: 'FIREBASE_JSON')]) {
-                    sh '''
-                        echo "Using Firebase credentials from $FIREBASE_JSON"
-                        cp "$FIREBASE_JSON" "$GOOGLE_APPLICATION_CREDENTIALS"
-
-                        # Deploy to Firebase Hosting
-                        firebase deploy --only hosting --project=jenkins --non-interactive
-                    '''
-                }
                 script {
-                    echo "✅ Deployment completed successfully!"
+                    echo "Starting deployment to Firebase Hosting..."
+                    echo "Target project: ${FIREBASE_PROJECT}"
+                }
+                // Deploy to Firebase Hosting
+                sh '''
+                    # Set Google Application Credentials
+                    export GOOGLE_APPLICATION_CREDENTIALS=${GOOGLE_APPLICATION_CREDENTIALS}
+                    # Deploy to Firebase Hosting
+                    firebase deploy --only hosting --project=${FIREBASE_PROJECT} --non-interactive
+                '''
+                script {
+                    echo "Deployment completed successfully!"
                 }
             }
         }
