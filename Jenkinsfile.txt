@@ -35,7 +35,7 @@ pipeline {
     post {
         success {
             slackSend (
-                channel: "${env.SLACK_CHANNEL}",
+                channel: "chatbot",
                 color: 'good',
                 message: "*SUCCESS* :rocket: Firebase deploy to `jenkins-1aca6` completed successfully! [Job: ${env.JOB_NAME} #${env.BUILD_NUMBER}]"
             )
@@ -43,7 +43,7 @@ pipeline {
 
         failure {
             slackSend (
-                channel: "${env.SLACK_CHANNEL}",
+                channel: "chatbot",
                 color: 'danger',
                 message: "*FAILED* :x: Firebase deploy to `jenkins-1aca6` failed! [Job: ${env.JOB_NAME} #${env.BUILD_NUMBER}]"
             )
