@@ -1,13 +1,13 @@
 pipeline {
     agent any
 
-    stage('Deploy') {
+    stages {
+        stage('Deploy') {
             steps {
                 script {
                     echo "Starting deployment to Firebase Hosting..."
                     echo "Target project: jenkins"
                 }
-                // Deploy to Firebase Hosting
                 sh '''
                     # Set Google Application Credentials
                     export GOOGLE_APPLICATION_CREDENTIALS=jenkins
@@ -19,4 +19,5 @@ pipeline {
                 }
             }
         }
+    }
 }
