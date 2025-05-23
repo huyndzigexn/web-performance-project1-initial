@@ -3,11 +3,10 @@ pipeline {
 
     environment {
         GOOGLE_APPLICATION_CREDENTIALS = credentials('jenkins2')
-        SLACK_CHANNEL = '#chatbot' // Thay bằng kênh Slack thật
+        SLACK_CHANNEL = '#chatbot'
     }
 
     options {
-        // Keep build logs clean
         ansiColor('xterm')
     }
 
@@ -19,7 +18,6 @@ pipeline {
                     echo "Target project: jenkins-1aca6"
                 }
 
-                // Deploy to Firebase Hosting
                 sh '''
                     export GOOGLE_APPLICATION_CREDENTIALS=${GOOGLE_APPLICATION_CREDENTIALS}
                     firebase deploy --only hosting --project=jenkins-1aca6 --non-interactive
