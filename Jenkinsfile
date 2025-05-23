@@ -6,7 +6,7 @@ pipeline {
             steps {
                 script {
                     echo "Starting deployment to Firebase Hosting..."
-                    echo "Target project: ${FIREBASE_PROJECT}"
+                    echo "Target project: jenkins"
                 }
                 // Deploy to Firebase Hosting
                 sh '''
