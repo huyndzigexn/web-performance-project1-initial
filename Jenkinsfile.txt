@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         GOOGLE_APPLICATION_CREDENTIALS = credentials('jenkins2')
-        SLACK_CHANNEL = '#your-channel' // Thay bằng kênh Slack thật
+        SLACK_CHANNEL = '#chatbot' // Thay bằng kênh Slack thật
     }
 
     options {
@@ -35,7 +35,7 @@ pipeline {
     post {
         success {
             slackSend (
-                channel: "chatbot",
+                channel: "${env.SLACK_CHANNEL}",
                 color: 'good',
                 message: "*SUCCESS* :rocket: Firebase deploy to `jenkins-1aca6` completed successfully! [Job: ${env.JOB_NAME} #${env.BUILD_NUMBER}]"
             )
@@ -43,7 +43,7 @@ pipeline {
 
         failure {
             slackSend (
-                channel: "chatbot",
+                channel: "${env.SLACK_CHANNEL}",
                 color: 'danger',
                 message: "*FAILED* :x: Firebase deploy to `jenkins-1aca6` failed! [Job: ${env.JOB_NAME} #${env.BUILD_NUMBER}]"
             )
